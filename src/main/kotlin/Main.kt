@@ -16,7 +16,7 @@ object RepartijaDeRegalos {
 
             //Si bien es lo mismo el lugar del observer, lo que lo dispara es recibirlo (en persona)
             //La cuestión es que si hay otro proceso que también envíe regalos a la persona
-            //Si ya lo tiene persona, lo maneja sin necesidad de tener los observers en sus cuerpo
+            //Si ya lo tiene persona, lo maneja sin necesidad de tener los observers en sus atributos
         }
     }
 }
@@ -44,7 +44,7 @@ class Persona{
 // Strategy ==> desacoplar el algoritmo de elección de una clase
 // La lógica de cómo se hace algo se separa de la clase que usa esa lógica
 //
-// En este caso desacoplar el algoritmo de elección de un regalo // Lo va a pedir en el coloquio - NO DEFINICIONES -- PUNTUAL DEL CÓdigo
+// En este caso desacoplar el algoritmo de elección de un regalo // Lo va a pedir en el coloquio - NO DEFINICIONES -- PUNTUAL DEL CÓDIGO
 /**************************************************************************/
 interface CriterioEleccionRegalo {
     fun leGusta(regalo: Regalo): Boolean
@@ -83,6 +83,13 @@ class CriterioEleccionRegaloVacia: CriterioEleccionRegalo{
 }
 
 //Punto 2
+
+// Template Method ----
+// Definimos el esqueleto de un algoritmo donde una parte se repite
+// pero permitimos que algunas otras, específicas, sean personalizables en clases hijas.
+//
+// Template valioso()
+// Primitiva es valiosoEspecifico()
 /**************************************************************************/
 abstract class Regalo(val valor: Int, val marca: String, val codigo: String) {
     val precioValioso: Double = 5000.0
@@ -112,7 +119,7 @@ class Experiencia(precio:Int, marca: String, codigo: String,val fechaDeExperienc
 }
 
 class Voucher: Regalo(2000, "Papapp","214125"){
-    override fun valioso(): Boolean = false // Si bien
+    override fun valioso(): Boolean = false // Si bien en la logica que uno armo no haria falta ponerlo, no sabes a futuro, asique vamos a lo seguro y lo ponemos false
     override fun valiosoEspecifico(): Boolean = false
 }
 
@@ -145,7 +152,7 @@ interface MailSender {
 data class Mail(val from: String,val to: String, val subject: String, val content: String)
 
 /******************************/
-class RegaloRecibidoInformarFlete(val fleteSender: FleteSender): RegaloRecibidoObserver { //Constructo Injection
+class RegaloRecibidoInformarFlete(val fleteSender: FleteSender): RegaloRecibidoObserver { //Constructor Injection
     override fun regaloRecibido(regalo: Regalo, persona: Persona) {
 
         fleteSender.notificarFlete(
@@ -157,11 +164,12 @@ class RegaloRecibidoInformarFlete(val fleteSender: FleteSender): RegaloRecibidoO
         )
     }
 }
-interface FleteSender {
+interface FleteSender { // Como no te dice con qué manda simulamos otro tipo de sender
     fun notificarFlete(data: InterfazFleteRenoLoco)
 }
 
 data class InterfazFleteRenoLoco(val domicilio:String, val nombre: String, val dni: String, val codigoRegalo: String)
+
 /******************************/
 class RegaloRecibidoPasarAInteresada(): RegaloRecibidoObserver {
     var limiteMaximo = 10000
@@ -207,17 +215,19 @@ class RegaloRecibidoPasarAInteresada(): RegaloRecibidoObserver {
 * Se utilizan clases ya que cada asignación necesitara de un object independiente
 *
 *-----------------------------------------------------
-* Ventajas en cuanto al armar un Strategy con Interface o Abstract Class
-*
-* 1-Interface
+* Ventajas en cuanto al armar un Strategy con Interface sobre Abstract Class
 * No pierdo la posibilidad de subclasificar la clase (no gasto la bala de la clase)
 *
-* 2-Abstract Class
+* -----------------------------------------------------
+* Cuando va Strategy?
+* Cuando necesito separar de mi objeto ese algoritmo que encapsulo en objetos polimórficos
 *
-*
-*
+* Cuando va Template Method?
+* Necesito tener objetos polimórficos en una jerarquía que no va a cambiar
+* por lo que no me interesa modificar la identidad del objeto a futuro
 *
 * -----------------------------------------------------
+*
 * Abstract Class
 *
 * 1-Uso de super
@@ -239,7 +249,7 @@ class RegaloRecibidoPasarAInteresada(): RegaloRecibidoObserver {
 * 2-var
 * El atributo puede ser reemplazado con otra instancia o valor en cualquier momento
 * Se puede leer y escribir
-* Menos seguro cuado se busta inmutabilidad
+* Menos seguro cuado se busca inmutabilidad
 *
 *-----------------------------------------------------
 * Cosas Varias
