@@ -251,7 +251,23 @@ class RegaloRecibidoPasarAInteresada(): RegaloRecibidoObserver {
 * Se puede leer y escribir
 * Menos seguro cuado se busca inmutabilidad
 *
-*-----------------------------------------------------
+* -----------------------------------------------------
+* Observer
+*
+* Uso de Long Parameter Method
+* Al usar varioss campos de otros objetos como la data class, se puede estructurar de una forma más ordenada el contendio que tendría un mail
+* Como no están agrupados los atributos que tienen la data class, ayuda a un mejor uso
+*
+* Data class
+* COmo generar automaticamente equals, copy permiten testearlos más facil
+* No necesitan getters ni setters
+* Permiten representar los objetos que vamos a vincular con las APIs
+* Inmutabless por defecto
+*
+* Value Object
+* Como el data class de mail, que lo usamos para representar el concepto de un mail
+*
+* -----------------------------------------------------
 * Cosas Varias
 *
 * No hacen falta los setters como agregarCosaAlCoso() o  quitarCosoDelCosito()
