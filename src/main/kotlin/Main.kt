@@ -164,6 +164,7 @@ class RegaloRecibidoInformarFlete(val fleteSender: FleteSender): RegaloRecibidoO
         )
     }
 }
+
 interface FleteSender { // Como no te dice con qué manda simulamos otro tipo de sender
     fun notificarFlete(data: InterfazFleteRenoLoco)
 }
