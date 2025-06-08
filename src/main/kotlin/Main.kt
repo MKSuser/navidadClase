@@ -194,7 +194,7 @@ class RegaloRecibidoPasarAInteresada(): RegaloRecibidoObserver {
 * Es más simple agregar otro elemento a la estructura
 *
 * 2-Crear subclases
-* Sepera comportamientos en clases hijas (Solo una herencia por clase)
+* Separa comportamientos en clases hijas (Solo una herencia por clase)
 * Útil cuando las variantes son pocas, estables y bien definidas (Regalos)
 * Poca flexibilidad, implica nueva clase o subclases
 *
@@ -206,7 +206,7 @@ class RegaloRecibidoPasarAInteresada(): RegaloRecibidoObserver {
 *
 * ---------------------------------------------------
 * En cuanto al criterio de Strategy (dependiendo de si quiero asignar algún valor)
-* -Atenti que usar object y clases dependiendo del tipo de State que aplica-
+* -Atenti que usa object y clases dependiendo del tipo de State que aplica-
 *
 * 1- Stateless
 * Reutilizable como object
@@ -242,27 +242,27 @@ class RegaloRecibidoPasarAInteresada(): RegaloRecibidoObserver {
 *
 * 1-val
 * Al generar objeto con atributos con "val" se generan objetos del tipo inmutables
-* Es una desición de diseño que implica que no queremos que ese atributo sea modificado
-* Se puede leer pero no se puede volver a asignar
-* En una coleción, podra ser mutable su contenido pero no la referencia (el tipo de objetos que guardo).
+* Es una decisión de diseño que implica que no queremos que ese atributo sea modificado
+* Se puede leer, pero no se puede volver a asignar
+* En una colección, podra ser mutable su contenido, pero no la referencia (el tipo de objetos que guardo).
 *
 * 2-var
 * El atributo puede ser reemplazado con otra instancia o valor en cualquier momento
 * Se puede leer y escribir
-* Menos seguro cuado se busca inmutabilidad
+* Menos seguro cuando se busca inmutabilidad
 *
 * -----------------------------------------------------
 * Observer
 *
 * Uso de Long Parameter Method
-* Al usar varioss campos de otros objetos como la data class, se puede estructurar de una forma más ordenada el contendio que tendría un mail
+* Al usar varios campos de otros objetos como la data class, se puede estructurar de una forma más ordenada el contenido que tendría un mail por ej
 * Como no están agrupados los atributos que tienen la data class, ayuda a un mejor uso
 *
 * Data class
-* COmo generar automaticamente equals, copy permiten testearlos más facil
+* Se tiene por default metodos como equals, copy... permiten testearlos más fácil
 * No necesitan getters ni setters
 * Permiten representar los objetos que vamos a vincular con las APIs
-* Inmutabless por defecto
+* Inmutables por defecto
 *
 * Value Object
 * Como el data class de mail, que lo usamos para representar el concepto de un mail
